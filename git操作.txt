@@ -1,0 +1,5 @@
+git init 创建本地仓库
+git clone htts//    将远程仓库拿到本地
+git add . 添加所有文件
+git commit -m "First commit"	提交
+git push -u origin master	提交到远程仓库
