@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edeg">
+	<title>Document</title>
+	<style>
+		[v-cloak] {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<!-- v-cloak可以解决插值表达式的闪烁问题，他不会覆盖当前的位置的其他的内容 -->
+		<p v-cloak>++++++++++{{msg}}________</p>
+		<!-- v-text没有闪烁的问题，他会覆盖当前元素文本中的内容 -->
+		<h4 v-text="msg3">-------</h4>
+		<!-- v-html能够自动的识别html代码并且正确的显示，不会显示标签等东西 -->
+		<h3 v-html='msg2'></h3>	
+	</div>
+
+	<script src='./vue.js'></script>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				msg: 'v-cloak解决差值表达式的闪烁问题',
+				msg2: '<h3>带标签的字符串用v-html显示</h3>',
+				msg3: 'v-text覆盖当前元素文本中的内容'
+			}
+		})
+	</script>
+</body>
+</html>

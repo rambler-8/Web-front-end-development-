@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="./vue.js"></script>
+	<title>事件修饰符</title>
+	<style>
+		.outer{
+			height:200px;
+			padding: 50px;
+			background-color: red;
+		}
+		.inner{
+			height:150px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<!-- .stop停止冒泡 -->
+	<!-- <div id="app">
+		<div class="outer">
+			<div class="inner" @click="innerClick">
+				<input type="button" value="blow me" @click.stop="buttonClick">
+			</div>
+		</div>
+	</div> -->
+
+	<!-- .capture捕获机制 -->
+	<!-- <div id="app">
+		<div class="outer">
+			<div class="inner" @click.capture="innerClick">
+				<input type="button" value="blow me" @click="buttonClick">
+			</div>
+		</div>
+	</div> -->
+
+	<!-- .self只触发自身的事件，冒泡执行了，但是不触发 -->
+	<!-- <div id="app">
+		<div class="outer">
+			<div class="inner" @click.self="innerClick">
+				<input type="button" value="blow me" @click="buttonClick">
+			</div>
+		</div>
+	</div> -->
+
+	<!-- .once事件只触发一次，冒泡依然执行 -->
+	<div id="app">
+		<div class="outer">
+			<div class="inner" @click="innerClick">
+				<input type="button" value="blow me" @click.once="buttonClick">
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+
+			},
+			methods: {
+				innerClick(){
+					console.log('里面的div被点击了')
+				},
+				buttonClick(){
+					console.log('按钮被点击了')
+				}
+			}
+		})
+	</script>
+</body>
+</html>

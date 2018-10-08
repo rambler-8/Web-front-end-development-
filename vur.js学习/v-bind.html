@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>v-bind</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- v-bind会绑定一个变量，把他当作js代码执行，那么就可以在他的后面拼接字符串 -->
+		<!-- <input type="button" value="按钮" v-bind:title="MyTitle + '123' "> -->
+		<!-- v-bind指令可以简写为  ：绑定的属性 -->
+		<!-- v-bind中可以写合法的js表达式 -->
+		<input type="button" value="按钮" :title="MyTitle + '123' ">
+	</div>
+	
+
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				MyTitle: '一个自定义的title'
+			}
+		})
+	</script>
+</body>
+</html>

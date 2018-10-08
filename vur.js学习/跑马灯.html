@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="./vue.js"></script>
+	<title>跑马灯</title>
+</head>
+<body>
+	<div id="app">
+		<input type="button" value="浪起来" v-on:click="move">
+		<input type="button" value="停止" v-on:click="stop">
+		<p v-text="msg"></p>
+	</div>
+
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				msg: "跑马灯效果！！！！",
+				//设置一个定时器的记录变量，好关闭定时器
+				intervalId: null
+			},
+			methods: {
+				move() {
+					// console.log(this.msg)
+					// 定时器已经开启就不管事件再次触发
+					if(this.intervalId!= null)
+						return;
+					// 设置定时器一定注意什么时候该关闭
+					this.intervalId = setInterval( ()=> {
+						var start = this.msg.substring(0,1);
+						var end = this.msg.substring(1);
+						this.msg = end + start;
+					}, 400)
+				},
+				stop() {
+					//终止定时器并没有把intervalId变为null
+					clearInterval(this.intervalId);
+					this.intervalId = null;
+				}
+			}
+		})
+	</script>
+</body>
+</html>
