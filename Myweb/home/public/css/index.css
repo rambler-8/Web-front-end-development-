@@ -1,5 +1,5 @@
 *{
-	font-family:Î¢ÈíÑÅºÚ;
+	font-family: 微软雅黑;
 	margin:0px;
 	padding:0px;
 	font-size:12px;
@@ -7,11 +7,10 @@
 body{
 	background:#f2f2f2;
 }
-.div{
+/*.div{
 	display:block;
-}
+}*/
 ul{
-	display:block;
 	list-style:none;
 }
 .main{
@@ -39,7 +38,7 @@ ul{
 	height:40px;
 }
 .homeMainBody{
-	height:5005px;
+	height:4780px;
 }
 a{
 	color:#999;
@@ -902,10 +901,37 @@ table{
 	z-index:15px;
 }
 .homeMainBody .homeImg .lay-1{
+	position: relative;
 	width:1200px;
 	height:500px;
 	margin:0 auto;
 	padding-top:7px;
+}
+.homeMainBody .homeImg .lay-1 .bgLeft{
+	position: absolute;
+	left: -500px;
+	height: 1000px;
+	width: 500px;
+	z-index: 0;
+}
+.homeMainBody .homeImg .lay-1 .bgLeft a{
+	width: 500px;
+	height: 1000px;
+	display: block;
+}
+
+.homeMainBody .homeImg .lay-1 .bgRight{
+	position: absolute;
+	right: -500px;
+	top: 0px;
+	height: 1000px;
+	width: 500px;
+	z-index: 0;
+}
+.homeMainBody .homeImg .lay-1 .bgRight a{
+	width: 500px;
+	height: 1000px;
+	display: block;
 }
 .homeMainBody .homeImg .lay-1 .indextabBox{
 	float:left;
@@ -1253,7 +1279,7 @@ table{
 }
 .homeMainBody .homeImg .floot_one .titlebox .comTitle{
 	float:left;
-	width:100px;
+	width:200px;
 	height:40px;
 }
 .homeMainBody .homeImg .floot_one .titlebox .comTitle i{
@@ -1497,6 +1523,148 @@ table{
 	color:#cc0000;
 }
 
+.homeMainBody .Recommend{
+	height:349px;
+	width:1200px;
+	min-width:1200px;
+	margin:0 auto;
+	margin-top:10px;
+	position: relative;
+}
+
+.homeMainBody .Recommend .titlebox{
+	height:43px;
+	width:1200px;
+}
+
+.homeMainBody .Recommend .titlebox li{
+	float: left;
+	width: 90px;
+	height: 43px;
+	line-height: 43px;
+	text-align: center;
+	overflow: hidden;
+	font-size: 16px;
+	color: #555;
+	cursor: pointer;
+	margin-right: 15px;
+}
+
+.homeMainBody .Recommend .titleSlider{
+	width: 90px;
+	height: 7px;
+	border-bottom: 2px solid #dd102e;
+	overflow: hidden;
+	text-align: center;
+	position: absolute;
+	top: 32px;
+}
+
+.homeMainBody .Recommend .logobox{
+	position: relative;
+    width: 1185px;
+    height: 274px;
+    border: 1px solid #ededed;
+    background: #fff;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.homeMainBody .Recommend .logobox .logoAll{
+	position: absolute;
+	/*width: 1185px;*/
+	height: 274px;
+}
+
+.homeMainBody .Recommend .logobox .logoAll li{
+	float: left;
+    width: 180px;
+    height: 80px;
+    position: relative;
+    margin: 0 17px 17px 0;
+    overflow: hidden;
+}
+
+
+.homeMainBody .Recommend .titleSlider b{
+	border-width: 10px;
+    border-style: dashed dashed solid;
+    border-color: transparent transparent #dd102e;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 0;
+    height: 0;
+    width: 0;
+    margin-top: -8px;
+}
+
+.homeMainBody .famous{
+	width:1200px;
+	min-width:1200px;
+	height: 174px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.homeMainBody .famous .titlebox{
+	height:40px;
+	line-height: 40px;
+}
+
+.homeMainBody .famous i{
+	display: inline-block;
+    width: 7px;
+    height: 18px;
+    background: #ff9000;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.homeMainBody .famous span{
+	display: inline-block;
+    vertical-align: middle;
+    font-size: 17px;
+    color: #333;
+    font-family: "微软雅黑";
+    margin-left: 10px;
+}
+
+.homeMainBody .famous .goodsMenu{
+	border: 1px solid #ececec;
+    background: #fff;
+    padding: 4px 4px 0 4px;
+}
+
+.homeMainBody .famous .goodsMenu dl{
+	overflow: hidden;
+	width: 1190px;
+}
+
+.homeMainBody .famous .goodsMenu .goodsMenu-1{	
+	float: left;
+    border-bottom: 4px solid #fff;
+    overflow: hidden;
+    width: 107px;
+    height: 60px;
+    background: url(../img/1.jpg) no-repeat center;
+}
+.homeMainBody .famous .goodsMenu .goodsMenu-1dd{
+	float:left;
+    width: 464px;
+    height: 64px;
+}
+
+.homeMainBody .famous .goodsMenu .goodsMenu-1dd .list p{	
+	height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+    text-indent: 10px;
+}
+.homeMainBody .famous .goodsMenu .goodsMenu-1dd .list p a{
+	font-family: '宋体';
+	color: #666;
+	padding: 0 8px;
+}
 .footer{
 	width:100%
 	height:567px;

@@ -205,4 +205,30 @@ $(function(){
   	$(this).css({'background':'#fff'})
   	$(this).find('span').css({'color':'#000'})
   });
+
+
+  $('.homeMainBody .Recommend .logobox .logoAll li a img').mouseenter(function(){
+      $(this).animate({
+      'margin-left': '-100px'
+    })
+  })
+   $('.homeMainBody .Recommend .logobox .logoAll li a img').mouseleave(function(){
+      $(this).animate({
+      'margin-left': '0px'
+    })
+  })
+
+
+   $('.homeMainBody .Recommend .titlebox li').mouseenter(function(){
+      var x = $(this).index();
+      var len = x*105;
+      // console.log(x);
+      $(this).css({'color': 'red'});
+      $(this).siblings().css({'color': '#555'});
+      $('.homeMainBody .Recommend .titleSlider').css({'left': len+'px'});
+      $('.homeMainBody .Recommend .logobox .logoAll').css({'display': 'none'});
+      $('.homeMainBody .Recommend .logobox .logoAll').eq(x).css({'display': 'block'});
+   })
+
+
 });
