@@ -238,29 +238,29 @@ $(function(){
       return;
     }
     if( t >= 1530) {  
-      console.log(t);
+      // console.log(t);
       $('.leftNav').show("slow");
       $('.leftNav .on').hide();
-      $('.leftNav .bg').show();
+      $('.leftNav .bg').css({'opacity': '1'});
     }
     if( t >= 1530 && t<= 2210) {
       $('.leftNav .flootOne .flootOneOn').show();
-      $('.leftNav .flootOne .flootOneBg').hide();
+      $('.leftNav .flootOne .flootOneBg').css({'opacity': '0'});
       return;
     }
     if( t > 2210 && t<= 2864) {
       $('.leftNav .flootTwo .flootTwoOn').show();
-      $('.leftNav .flootTwo .flootTwoBg').hide();
+      $('.leftNav .flootTwo .flootTwoBg').css({'opacity': '0'});
       return;
     }
     if( t > 2864 && t<= 3530) {
       $('.leftNav .flootThree .flootThreeOn').show();
-      $('.leftNav .flootThree .flootThreeBg').hide();
+      $('.leftNav .flootThree .flootThreeBg').css({'opacity': '0'});
       return;
     }
     if( t > 3530 && t <= 4200) {
       $('.leftNav .flootFour .flootFourOn').show();
-      $('.leftNav .flootFour .flootFourBg').hide();
+      $('.leftNav .flootFour .flootFourBg').css({'opacity': '0'});
       return;
     }
   }
@@ -273,5 +273,27 @@ $(function(){
     $(this).css({'opacity': '1'})
     $(this).prev('a').hide();
   });
+  $('.leftNav .flootFiveBg').mouseenter(function(){
+    $(this).css({'background': '#d43d4e'})
+  }).mouseleave(function(){
+    $(this).css({'background': '#fff'})
+  })
+   
 
+  // 左侧导航栏鼠标点击跳转事件
+  $('.leftNav .flootOneBg').on('click', function(){
+    $('html,body').animate({scrollTop: 1540}, 800);
+  });
+  $('.leftNav .flootTwoBg').on('click', function(){
+    $('html,body').animate({scrollTop: 2211}, 800);
+  });
+  $('.leftNav .flootThreeBg').on('click', function(){
+    $('html,body').animate({scrollTop: 2865}, 800);
+  });
+  $('.leftNav .flootFourBg').on('click', function(){
+    $('html,body').animate({scrollTop: 3531}, 800);
+  });
+  $('.leftNav .flootFive').on('click', function(){
+    $('html,body').animate({scrollTop: 0}, 800);
+  });
 });
