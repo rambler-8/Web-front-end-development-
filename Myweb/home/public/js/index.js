@@ -230,5 +230,48 @@ $(function(){
       $('.homeMainBody .Recommend .logobox .logoAll').eq(x).css({'display': 'block'});
    })
 
+   //窗口滚动监听事件
+  window.onscroll = function(){ 
+    var t = document.documentElement.scrollTop || document.body.scrollTop;
+    if( t < 1530 ) {
+      $('.leftNav').hide("slow");
+      return;
+    }
+    if( t >= 1530) {  
+      console.log(t);
+      $('.leftNav').show("slow");
+      $('.leftNav .on').hide();
+      $('.leftNav .bg').show();
+    }
+    if( t >= 1530 && t<= 2210) {
+      $('.leftNav .flootOne .flootOneOn').show();
+      $('.leftNav .flootOne .flootOneBg').hide();
+      return;
+    }
+    if( t > 2210 && t<= 2864) {
+      $('.leftNav .flootTwo .flootTwoOn').show();
+      $('.leftNav .flootTwo .flootTwoBg').hide();
+      return;
+    }
+    if( t > 2864 && t<= 3530) {
+      $('.leftNav .flootThree .flootThreeOn').show();
+      $('.leftNav .flootThree .flootThreeBg').hide();
+      return;
+    }
+    if( t > 3530 && t <= 4200) {
+      $('.leftNav .flootFour .flootFourOn').show();
+      $('.leftNav .flootFour .flootFourBg').hide();
+      return;
+    }
+  }
+
+  //左侧导航栏鼠标移入移出事件
+  $('.leftNav .bg').mouseenter(function(){
+    $(this).css({'opacity': '0'})
+    $(this).prev('a').show();
+  }).mouseleave(function(){
+    $(this).css({'opacity': '1'})
+    $(this).prev('a').hide();
+  });
 
 });

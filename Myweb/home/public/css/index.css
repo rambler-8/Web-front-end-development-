@@ -914,6 +914,7 @@ table{
 	width: 500px;
 	z-index: 0;
 }
+
 .homeMainBody .homeImg .lay-1 .bgLeft a{
 	width: 500px;
 	height: 1000px;
@@ -2063,3 +2064,110 @@ table{
 .rightSidebarBox .rightSidebarCon .rSidebarItem .sidebarUser .sidebarUserOpe ul li .club{
 	background:url('../img/public-24.png') no-repeat -158px -219px;
 }
+
+.leftNav{
+	width: 40px;
+	height: 205px;
+	position: fixed;
+	top: 95px;
+	left: 50%;
+	margin-left: -650px;
+	display: none;
+}
+.leftNav .flootOne{
+	position: absolute;
+	text-align: center;
+	font-size: 12px;
+}
+.leftNav .flootTwo{
+	position: absolute;
+	top: 30px;
+	text-align: center;
+	font-size: 12px;
+}
+.leftNav .flootThree{
+	position: absolute;
+	top: 60px;
+	text-align: center;
+	font-size: 12px;
+}
+.leftNav .flootFour{
+	position: absolute;
+	top: 90px;
+	text-align: center;
+	font-size: 12px;
+}
+.leftNav .flootFive{
+	position: absolute;
+	top: 120px;
+	text-align: center;
+	font-size: 12px;
+}
+.leftNav .flootOne .flootOneOn, .leftNav .flootTwo .flootTwoOn,
+.leftNav .flootThree .flootThreeOn, .leftNav .flootFour .flootFourOn{
+	position: absolute;
+	display: none;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	border-radius: 30px;
+	background-color: #d43d4e;
+}
+.leftNav .flootOne .flootOneBg, .leftNav .flootTwo .flootTwoBg,
+.leftNav .flootThree .flootThreeBg, .leftNav .flootFour .flootFourBg,
+.leftNav .flootFive .flootFiveBg{
+	position: absolute;
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	background: #fff;
+	z-index: 2;
+}
+.leftNav .flootOne .flootOneBg i{
+	width: 12px;
+	height: 20px;
+	background: url('../img/newIndexIcon-24.png') no-repeat 0px -181px;
+	position:absolute;
+	top: 5px;
+	left: 9px;
+	z-index: 10;
+}
+.leftNav .flootTwo .flootTwoBg i{
+	width: 8px;
+	height: 21px;
+	background: url('../img/newIndexIcon-24.png') no-repeat -18px -181px;
+	position:absolute;
+	top: 5px;
+	left: 12px;
+	z-index: 10;
+}
+.leftNav .flootThree .flootThreeBg i{
+	width: 20px;
+	height: 20px;
+	background: url('../img/newIndexIcon-24.png') no-repeat -31px -181px;
+	position:absolute;
+	top: 5px;
+	left: 5px;
+	z-index: 10;
+}
+.leftNav .flootFour .flootFourBg i{
+	width: 12px;
+	height: 19px;
+	background: url('../img/newIndexIcon-24.png') no-repeat -56px -181px;
+	position:absolute;
+	top: 5px;
+	left: 9px;
+	z-index: 10;
+}
+.leftNav .flootFive .flootFiveBg i{
+	width: 15px;
+	height: 10px;
+	background: url('../img/newIndexIcon-24.png') no-repeat -75px -188px;
+	position:absolute;
+	top: 9px;
+	left: 8px;
+	z-index: 10;
+}
+
