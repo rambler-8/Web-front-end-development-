@@ -15,11 +15,10 @@
 			<img :src="productDet.image" alt="商品图片">
 		</div>
 		<div class="productOption clearfloat">
-			<div class="price">
+			<div class="price" v-if="productDet.option">
 				<span>￥ {{productDet.option[changeBor].pri}}</span> 
 				<span style="color: #999; font-size: 12px;">余货：{{productDet.option[changeBor].number}}</span>
 			</div>
-			<!-- <div class=""></div> -->
 			<div class="option f_left" v-for="(item, index) in productDet.option" :class="{ 'bor':changeBor == index}" @click="bors(index)">
 				<!-- {{item}} -->
 				{{item.op}}
@@ -61,8 +60,10 @@ export default{
 	},
 	mounted() {
 		if(this.$store.state.productList == null)
-			console.log(1);
+			// console.log(1);
 			this.$store.dispatch('getProductList');
+		// console.log(this.id);
+		// console.log(this.$store.state.productList);
 		this.setProductDet(this.id);
 	}
 }

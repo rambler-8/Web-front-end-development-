@@ -37,7 +37,7 @@ const store = new Vuex.Store ({
                 p.opIndex = pro.op;
                 state.carList.push(p);
             }
-            console.log(state.carList);
+            // console.log(state.carList);
         }
 	},
 	actions: {

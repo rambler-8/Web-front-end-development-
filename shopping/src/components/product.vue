@@ -17,7 +17,7 @@
 	    	<!-- :to="'/product/' + info.id" -->
 	    	<ul>
 	    		<li v-for='(item, index) in product_data'>
-	    			<router-link :to="'/productDetail/' + item.id" style="display: block; width: 100%; height: 120px;">
+	    			<router-link :to.prevent="'/productDetail/' + item.id" style="display: block; width: 100%; height: 120px;">
 	    				<div class="productImg">
 	    					<img :src="item.image" alt="商品图片">
 	    				</div>
@@ -26,7 +26,7 @@
 	    					<div class="productPri">￥{{item.option[0].pri}}</div>
 	    					<div class="productNum">数量:{{item.option[0].number}}</div>
 	    					<div class="productToC">
-	    						<img src="/static/car.png" alt="addToCar" @click.prevent="productAddtoCar(item.id)">
+	    						<img src="/static/car.png" alt="addToCar" @touchstart.prevent="productAddtoCar(item.id)">
 	    					</div>
 	    				</div>
 	    			</router-link>
