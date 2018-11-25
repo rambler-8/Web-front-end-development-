@@ -1,2 +1,16 @@
 vue 中函数方法传参数最多2个 多了只能转变成对象
-异步获取数据 界面会不刷新 为空白
+
+异步获取数据 界面会刷新一次 第一次会出现数据undefinde的错误
+	在界面上加上v-if 保证没有数据的时候不会执行渲染部分的代码
+
+0 of undefined
+	v-if="可能找不到的数据" 有就显示 没有就没有
+undefined of undefined
+
+
+vue You may have an infinite update loop in a component render function
+	在v-for当中，如果在循环当中调用了方法，而在方法当中去修改data中属性的值，就会导致这样的问题。
+
+js in关键字后面必须是对象，要操作数组怎么办
+	不用in
+	用js.indexOf('a') 	有则返回下标  没有返回-1 

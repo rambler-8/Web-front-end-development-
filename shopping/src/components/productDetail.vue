@@ -59,8 +59,7 @@ export default{
 		}
 	},
 	mounted() {
-		if(this.$store.state.productList == null)
-			// console.log(1);
+		if(!this.$store.state.productList.length)
 			this.$store.dispatch('getProductList');
 		// console.log(this.id);
 		// console.log(this.$store.state.productList);

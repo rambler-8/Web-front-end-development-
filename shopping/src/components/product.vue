@@ -33,6 +33,17 @@
 	    		</li>
 	    	</ul>
 	    </div>
+	    <div class="bottom_nav">
+	    	<div class="home">
+	    		<router-link to='/product' style="display: block; width:100%; height: 100%;"><img class="nav_img" src="/static/home.png" alt="home"></router-link>	
+	    	</div>
+	    	<div class="cart">
+	    		<router-link to='/car' style="display: block; width:100%; height: 100%;"><img class="nav_img" src="/static/cart.png" alt="cart"></router-link>
+	    	</div>
+	    	<div class="login">
+	    		<img class="nav_img" src="/static/login.png" alt="login">
+	    	</div>
+	    </div>
 	 </div>
 </template>
 
@@ -92,7 +103,10 @@ export default{
 .mainbox{
 	width: 100%;
 }
-ul,li{
+ul{
+	width: 100%;
+}
+li{
 	width: 100%;
 	position: relative;
 	height: 120px;
@@ -139,5 +153,39 @@ li{
 	position: absolute;
 	top: 0;
 	right: 5px;
+}
+.bottom_nav{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	z-index: 50;
+}
+.bottom_nav > .home{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 33%;
+	height: 50px;
+	text-align: center;
+}
+.nav_img{
+	width: 62px;
+	height: 48px;
+}
+.bottom_nav > .cart{
+	width: 100%;
+	height: 50px;
+	padding: 0 33%;
+	text-align: center;
+}
+.bottom_nav > .login{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 33%;
+	height: 50px;
+	text-align: center;
 }
 </style>

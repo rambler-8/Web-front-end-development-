@@ -45,7 +45,6 @@ const store = new Vuex.Store ({
             // 真实环境通过 ajax 获取，这里用异步模拟
             // setTimeout(() => {
                 this.commit('setProductList', product_data.product);
-                // console.log(1);
             // }, 500);
         }
 	},
