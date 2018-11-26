@@ -1,8 +1,6 @@
 <template>
 	<div class="productDetail" v-if='productDet'>
-		<div class="nav">
-			
-		</div>
+		<commonnav :heading="tit"></commonnav>
 		<!-- productDet -->
 		<!-- {
 			id: 1, name: '牙刷', image: '../static/1.jpg', title: '牙刷 软毛 硬毛 舒适', option: [
@@ -33,14 +31,19 @@
 </template>
 
 <script>
+import commonnav from './commonnav.vue';
 export default{
 	name: 'productDetail',
+	components: {
+      commonnav
+    },
 	data() {
 		return {
 			//获取传递的参数
 			id: parseInt(this.$route.params.id),
 			productDet: [],
-			changeBor: 0
+			changeBor: 0,
+			tit: "商品详情"
 		}
 	},
 	computed: {

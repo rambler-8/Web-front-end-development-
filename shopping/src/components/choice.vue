@@ -87,7 +87,7 @@ export default{
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
-	z-index: 50;
+	z-index: 5;
 	width: 100%;
 	min-height: 300px;
 }

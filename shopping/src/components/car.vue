@@ -1,5 +1,6 @@
 <template>
 	<div class="product_car">
+		<commonnav :heading="tit"></commonnav>
 		<div class="product">
 			<!-- {{product}} -->
 			<!-- {{totalPrice}} -->
@@ -49,17 +50,20 @@
 
 <script>
 import choice from './choice.vue';
+import commonnav from './commonnav.vue';
 export default{
 	name: 'car',
 	components: {
-      choice
+      choice,
+      commonnav
     },
 	data() {
 		return {
 			product: [],
 			goods: {},
 			show: false,
-			selects: []
+			selects: [],
+			tit: "购物车"
 		}
 	},
 	methods: {
@@ -193,6 +197,7 @@ export default{
 .content{
 	width: 100%;
 	height: 100%;
+	z-index: 10;
 }
 .content .title{
 	width: 100%;

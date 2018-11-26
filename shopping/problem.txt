@@ -11,6 +11,9 @@ undefined of undefined
 vue You may have an infinite update loop in a component render function
 	在v-for当中，如果在循环当中调用了方法，而在方法当中去修改data中属性的值，就会导致这样的问题。
 
-js in关键字后面必须是对象，要操作数组怎么办
-	不用in
-	用js.indexOf('a') 	有则返回下标  没有返回-1 
+js in关键字后面必须是对象，操作数组的时候返回的是下标不是对应的数值,
+要判断某个元素是否在数组中 不能用if（ a in Array)
+	用array.indexOf('a') 	有则返回下标  没有返回-1 
+	if(array.indexOf('a') >= 0)
+	自己写循环判断也可以
+	遍历的是对象的枚举属性，删除还没有遍历的属性则不会枚举到，添加新属性也不会

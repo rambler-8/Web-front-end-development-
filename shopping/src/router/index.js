@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import product from '@/components/product'
 import productDetail from '@/components/productDetail'
 import car from '@/components/car'
+import commonnav from '@/components/commonnav'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,10 @@ export default new Router({
       path: '/car',
       name: 'car',
       component: car
+    },{
+      path: '/nav',
+      name: 'commonnav',
+      component: commonnav
     }
   ]
 })
