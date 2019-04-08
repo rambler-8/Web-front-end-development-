@@ -1,0 +1,59 @@
+https://glacial-atoll-55322.herokuapp.com/platform/new/edit
+https://v-charts.js.org/#/pie
+
+node express + mongodb + vue cli环境安装
+
+node服务热加载
+	使用node-dev
+
+路由嵌套
+	调用的页面里面再使用router-view标签
+	router里面添加children子路由实现
+
+除了router-link的页面跳转
+	事件触发跳转
+	this.$router.push({path: ''});
+
+mongodb数据库集合名称中间不要用大写
+
+获取get传递的参数
+	this.$route.params.***
+
+get传参注意最后传参数时的字符串拼接
+
+有序列表ol会有左paddding 40px，如果写了*{padding： 0}的话,会越界出去
+
+vue渲染数据的时候，如果使用了多层的for in 循环, 那么改变里层数据界面可能不会数据，
+解决办法，强制刷新 this.$forceUpdate();
+
+获取对象的长度 Object.keys(obj).length
+Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致 。
+
+用mongoose对mongodb数据库更新数据的
+models.modelsname.update(conditions, newdate, (err, date)=> {
+	
+})
+注意update匹配conditions后会覆盖原有的数据
+其中conditions是一个对象，用来找到更新的表
+	newdate是一个对象，表示更新的数据。注意newdate一定要重新定义一下，不要直接那请求的req.body,这可能会导致
+	newdate里面有不可变的_id导致更新错误
+update命令格式：
+db.collection.update(criteria,objNew,upsert,multi)
+参数说明：
+criteria：查询条件
+objNew：update对象和一些更新操作符
+upsert：如果不存在update的记录，是否插入objNew这个新的文档，true为插入，默认为false，不插入。
+multi：默认是false，只更新找到的第一条记录。如果为true，把按条件查询出来的记录全部更新
+update写全四个参数会报错，可能是使用的问题后面再研究
+
+
+mongodb操作数据库出现了__v字段
+	解决：在Scheam中加入{versionKey:false}
+
+
+用vue-router重新路由到当前页面，页面是不进行刷新的
+采用window.reload()，或者router.go(0)刷新时，整个浏览器进行了重新加载，闪烁，体验不好
+	解决： 两次跳转实现，先跳转到空白界面在返回
+
+this.$set(obj, key ,value)为对象添加新的key，界面会重新渲染
+obj.key = value 则不会
