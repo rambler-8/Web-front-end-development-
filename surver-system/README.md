@@ -1,4 +1,4 @@
-# surver-system
+﻿# surver-system
 
 > a surver system project
 
@@ -33,7 +33,7 @@ npm test
 
 #### 二：使用到的模块
 
-![](C:\Users\w\Desktop\毕设截图\1.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/1.png)
 
 
 
@@ -41,11 +41,11 @@ npm test
 
 #### 1)功能流程图
 
-![](C:\Users\w\Desktop\毕设截图\liucheng.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/liucheng.png)
 
 #### 2）实现截图和说明
 
-![](C:\Users\w\Desktop\毕设截图\adminLogin.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/adminLogin.png)
 
 ​	登录截图，包含有数据的校验和错误提示，用户登录类似，不重复展示
 
@@ -53,19 +53,19 @@ npm test
 
 
 
-![](C:\Users\w\Desktop\毕设截图\allSurver.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/allSurver.png)
 
 ​	登录后的默认界面，可以看到功能nav菜单和对问卷的操作
 
 
 
-![](C:\Users\w\Desktop\毕设截图\editSurver.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/editSurver.png)
 
 ​	编辑问卷功能，新建问卷重用这个template
 
 
 
-![](C:\Users\w\Desktop\毕设截图\surverAnswer.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/surverAnswer.png)
 
 ​	问卷结果查看，图形是用v-chart实现的。
 
@@ -73,20 +73,20 @@ npm test
 
 
 
-![](C:\Users\w\Desktop\毕设截图\userInformation.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/userInformation.png)
 
 ​	查看用户信息，能删除用户，重置密码
 
-![](C:\Users\w\Desktop\毕设截图\addUser.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/addUser.png)
 
 ​	添加用户包含基本的校验
 
 
 
-![](C:\Users\w\Desktop\毕设截图\addReleaseSurver.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/addReleaseSurver.png)
 
 ​	用户登录后的默认界面，登录实现和管理员登录一样，图就不贴了，用户能进行的操作有参加问卷，修改信息，退出登录
 
-![](C:\Users\w\Desktop\毕设截图\answerSurver.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/answerSurver.png)
 
-![](C:\Users\w\Desktop\毕设截图\usereditInformation.png)
+![](https://github.com/a-rambler/Web-front-end-development-/blob/master/surver-system/screenshot/usereditInformation.png)
