@@ -55,9 +55,9 @@ export default{
 	mounted() {
 		this.username = this.$store.state.username;
 		//之后要取消注释
-		if(!this.username){
-			this.$router.push({path: '/userLogin'});
-		}
+		// if(!this.username){
+		// 	this.$router.push({path: '/userLogin'});
+		// }
 	}
 }
 </script>

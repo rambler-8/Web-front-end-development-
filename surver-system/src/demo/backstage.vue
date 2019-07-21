@@ -23,7 +23,14 @@ export default{
 	components: {
       backstageTop,
       backstageNav
-    }
+    },
+    mounted() {
+		// this.adminLogin = this.$store.state.username;
+		// 之后要取消注释
+		if(!this.$store.state.adminLogin){
+			this.$router.push({path: '/adminLogin'});
+		}
+	}
 }
 </script>
 

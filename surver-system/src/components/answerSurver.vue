@@ -2,6 +2,7 @@
 <div class="content">
 	<!-- {{question}} -->
  	<!-- [ { "number": 1, "title": "问题一", "type": "radio", "option": { "A": "选项一", "B": "选项二" }, "choose": { "A": 0, "B": 0 } }, { "option": { "A": "选项一", "B": "选项二", "C": "选项三", "D": "选项四" }, "number": 2, "title": "问题二", "type": "checkbox", "choose": { "A": 0, "B": 0, "C": 0, "D": 0 } } ] -->
+ 	<!-- {{answer}} -->
 	<div class="surverTitle">{{questions.surverTitle}}</div>
 	<div class="que">
 		<ol style="padding-left: 30px;">
@@ -23,6 +24,18 @@
 					<el-checkbox v-model="answer[item.number]" :label=key @change="checkboxchange()">
 						{{opt}}
 					</el-checkbox>
+				</div>
+				<div class="option textarea" v-if="item.type=='text' ">
+					<!-- <el-input v-model="answer[item.number]" placeholder="您的回答"></el-input> -->
+					<el-input
+					  type="textarea"
+					  :rows="2"
+					  placeholder="您的回答"
+					  minlength=5
+					  maxlength=200
+					  @blur="answerchange(answer[item.number])"
+					  v-model="answer[item.number]">
+					</el-input>
 				</div>
 			</li>
 		</ol>
@@ -59,6 +72,9 @@ export default{
 				this.$router.push({path: '/user/allReleaseSurver'});
 			}
 		},
+		answerchange(e){
+			
+		},
 		submitAnswer() {
 			// console.log(this.answer);
 			for (let a in this.answer){
@@ -71,7 +87,13 @@ export default{
 				// console.log(typeof(this.answer[i]))
 				let a = this.answer[i]
 				if(typeof(a) == "string"){
-					this.question[i-1].choose[a]++;
+					//console.log(this.question[i-1].answer)
+					if(this.question[i-1].answer == 'undefined'){
+						//单选题
+						this.question[i-1].choose[a]++;
+					}else{
+						this.question[i-1].answer = a;
+					}
 				}else {
 					for(let s in a){
 						// console.log(a[s]);
@@ -110,6 +132,10 @@ export default{
 						// this.answer[i+1] = [];
 						// this.$set("answer[i+1]", []);
 						this.$set(this.answer, i+1, []);  // 这样操作对象可以让页面重新渲染
+					}else if(this.question[i].type == "text"){
+						// this.answer[i+1] = [];
+						// this.$set("answer[i+1]", []);
+						this.$set(this.answer, i+1, "");  // 这样操作对象可以让页面重新渲染
 					}else{
 
 					}
@@ -154,5 +180,10 @@ export default{
 	width: 50px;
 	height: 100%;
 	margin: 0 10px;
+}
+
+.textarea >>> .el-textarea__inner{
+ 	font-size:20px !important;
+ 	color: #000;
 }
 </style>

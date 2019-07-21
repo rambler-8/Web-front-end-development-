@@ -97,7 +97,7 @@ export default{
 	},
 	mounted() {
 		this.$http.get('/api/admin/getUsers/').then((response) =>{
-			console.log(response);
+			// console.log(response);
 			this.users = response.body || [];
 		}).catch((reject) => {
           console.log(reject)

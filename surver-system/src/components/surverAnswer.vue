@@ -2,9 +2,14 @@
 <div class="content">
 	<!-- {{question}} -->
  	<!-- [ { "number": 1, "title": "问题一", "type": "radio", "option": { "A": "选项一", "B": "选项二" }, "choose": { "A": 0, "B": 0 } }, { "option": { "A": "选项一", "B": "选项二", "C": "选项三", "D": "选项四" }, "number": 2, "title": "问题二", "type": "checkbox", "choose": { "A": 0, "B": 0, "C": 0, "D": 0 } } ] -->
+ 	<div style="position: fixed;">
+		<el-button size="small" @click="tochartShow()">图片展示</el-button>
+		<el-button size="small" @click="toformShow()">表格展示</el-button>
+		<button type="button" @click="getPdf()" style="z-index: 100">导出PDF</button>
+	</div>
  	<div class="pageTitle">问卷结果</div>
 	<div class="surverTitle">{{questions.surverTitle}}</div>
-	<div class="que">
+	<div class="que" id="pdfDom">
 		<ol style="padding-left: 30px;">
 			<li v-for="(item, index) in question" class="question">
 				<!-- {{item}}
@@ -13,14 +18,34 @@
 				<p>{{item.title}}
 					<i id="que-title" v-if="item.type=='radio'">(单选)</i>
 					<i id="que-title" v-if="item.type=='checkbox'">(多选)</i>
-					<i id="que-title" v-if="item.type=='text'">(问答)</i>
+					<i id="que-title" v-if="item.type=='text'">(问答)暂时只显示一个回答</i>
 				</p>
-				<div class="chart">
+				<div class="chart" v-if="item.type!= 'text' " v-show="chartShow">
 					<ve-pie :data="chartData[item.number]"
 					width="500px"
 					height="200px"
 					:settings="chartSettings"
 					style="margin:0 0 0 100px;"></ve-pie>
+				</div>
+				<div v-if="item.type!= 'text' " v-show="formShow">
+					<el-table
+						:data="chartData[item.number].rows"
+						stripe
+						style="width: 100%">
+						<el-table-column
+						  prop="选项"
+						  label="选项"
+						  width="180">
+						</el-table-column>
+						<el-table-column
+						  prop="访问用户"
+						  label="选择人数"
+						  width="180">
+						</el-table-column>
+					</el-table>
+				</div>
+				<div style="width:100%; height:50px;" v-if="item.type== 'text' ">
+					{{item.answer}}
 				</div>
 			</li>
 		</ol>
@@ -42,13 +67,23 @@ export default{
 			Alphabet: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
 			chartData: {
 
-			}
+			},
+			chartShow: true,
+			formShow: false,
+			htmlTitle: '问卷调查结果'
 			//日期对应为选项,访问用户对应数量
 			//question[i].option.A   question[i].choose.A
 		}
 	},
 	methods: {
-
+		tochartShow() {
+			this.chartShow = true;
+			this.formShow= false;
+		},
+		toformShow() {
+			this.chartShow = false;
+			this.formShow= true;
+		}
 	},
 	mounted() {
 		this.$http.get('/api/admin/getquestion/'+this.id).then((response) => {
@@ -61,18 +96,20 @@ export default{
 				return a.number - b.number;
 			})
 			for(let i=0; i<this.question.length; i++){
-				this.$set(this.chartData, i+1, {
-					columns: ['选项', '访问用户'],
-					rows: []
-				});
-				for(let j in this.question[i].option){
-					// console.log(this.question[i].option[j]);
-					// console.log(this.question[i].choose[j]);
-					let op = this.question[i].option[j],
-						num = this.question[i].choose[j]
-					let ob = {'选项': op, '访问用户': num}
-					// this.$set(this.chartData[i+1].rows, i, ob)
-					this.chartData[i+1].rows.push(ob);
+				if(this.question[i].type!= 'text'){
+					this.$set(this.chartData, i+1, {
+						columns: ['选项', '访问用户'],
+						rows: []
+					});
+					for(let j in this.question[i].option){
+						// console.log(this.question[i].option[j]);
+						// console.log(this.question[i].choose[j]);
+						let op = this.question[i].option[j],
+							num = this.question[i].choose[j]
+						let ob = {'选项': op, '访问用户': num}
+						// this.$set(this.chartData[i+1].rows, i, ob)
+						this.chartData[i+1].rows.push(ob);
+					}
 				}
 			}
 			console.log(this.chartData);

@@ -67,6 +67,11 @@ export default new Router({
 		    component: userLogin
 	    },
 	    {
+		    path: '/register',
+		    name: 'editInformation',
+		    component: editInformation
+	    },
+	    {
 		    path: '/user/',
 		    name: 'user',
 		    component: user,

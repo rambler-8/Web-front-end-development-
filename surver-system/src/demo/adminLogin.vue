@@ -73,10 +73,12 @@ export default {
             // console.log(response.body);
             if(response.body.length > 0){
               // console.log(this.$store.state.username);
+              this.$store.state.adminLogin = true;
               this.$router.push({path: '/admin/allsurver'});
             }else{
               //提示密码错误
               this.a = true;
+              // console.log(response.body)
               this.passwordError = "密码错误"
             }   
           }).catch((reject) => {

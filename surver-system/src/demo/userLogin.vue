@@ -2,6 +2,7 @@
   <div class="bac">
     <div class="login">
       <p>问卷调查用户登录</p>
+      <span style="position:absolute; top:0; right: 0" @click="register()">注册</span>
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" style="margin: 15px auto; width:500px;" class="demo-ruleForm">
         <el-form-item label="邮箱" prop="Email">
           <el-input v-model="ruleForm.Email" ></el-input>
@@ -99,6 +100,9 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    register() {
+      this.$router.push({path: '/register'});
     }
   }
 }

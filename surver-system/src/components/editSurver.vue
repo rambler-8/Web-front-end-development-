@@ -17,34 +17,25 @@
 				<p contenteditable @focus="queTitlegetFocus()" @blur="changeQuestionTitle(index, $event)" >{{item.title}}
 					<i id="que-title" v-if="item.type=='radio' && queExp ">(单选)</i>
 					<i id="que-title" v-if="item.type=='checkbox' && queExp ">(多选)</i>
+					<i id="que-title" v-if="item.type=='text' && queExp ">(问答)</i>
 				</p>
 				<!-- 选项工具 -->
-				<div class="option-panel f_left">
+				<div class="option-panel f_left" >
 					<ul style="list-style: none;">
 		              <li title="上移" @click="optionPositionFront(index)">↑</li>
 		              <li title="下移" @click="optionPositionBack(index)">↓</li>
 		              <li title="删除" @click="deleteoption(index)">X</li>
 		            </ul>
 				</div>
-				<ul style="padding-left: 30px;">
+				<ul style="padding-left: 30px;" v-if="item.type!= 'text'">
 					<!-- {{item.option}} -->
 					<li v-for="(opt, key) in item.option">
 						<p contenteditable="true" @blur="changeQuestionOption(index, key, $event)">
 							{{opt}}
 						</p>
-						<!-- 选项工具 -->
-						<!-- <ul class="option-panel" style="list-style: none; display:block">
-			              <li
-			                class="iconfont">上移</li>
-			              <li
-			                class="iconfont">下移</li>
-			              <li
-			                v-show="item.option.length > 2"
-			                class="iconfont">X</li>
-			            </ul> -->
 					</li>
 				</ul>
-				<div v-if="question.type !== 'text'" class="add-option">
+				<div v-if="item.type !== 'text'" class="add-option">
 					<!-- <span class="iconfont">&#xe60f;</span> -->
 					<span @click="addOption(index)">添加选项</span>
 					<span @click="deleteOption(index)">删除选项</span>
@@ -55,10 +46,11 @@
             <div class="toolbar">
               <span class="btn" @click="addQuestion('radio')"><span class="iconfont">&#xe64e;</span>单选题</span>
               <span class="btn" @click="addQuestion('checkbox')"><span class="iconfont">&#xe64a;</span>多选题</span>
-              <!-- <span class="btn" @click="addQuestion('text')"><span class="iconfont">&#xe64b;</span>文本题</span> -->
+              <span class="btn" @click="addQuestion('text')"><span class="iconfont">&#xe64b;</span>文本题</span>
             </div>
             <div class="add-btn"><span class="iconfont">&#xe60f;</span>添加问题</div>
         </div>
+        <!-- 结束日期 -->
         <div calss="endDate">
         	结束日期：
         	<el-date-picker
@@ -69,6 +61,24 @@
 		    </el-date-picker>
 		    <span :class=endTimeError style="color:red;font-size: 15px;">结束时间只能在未来的某个时间</span>
         </div>
+        <!-- 上传文档生成问卷 -->
+        <el-upload
+			class="upload-demo"
+			action="/api/uploadfile"
+			:auto-upload="false"
+			:on-preview="handlePreview"
+			:on-remove="handleRemove"
+			:before-remove="beforeRemove"
+			:http-request="upload"
+			multiple
+			:limit="1"
+			:on-exceed="handleExceed"
+			:on-change="handleChange"
+			:file-list="fileList">
+			<el-button size="small" type="primary">点击上传</el-button>
+			<div slot="tip" class="el-upload__tip">只能上传tet、word文件，且不超过500kb</div>
+		</el-upload>
+		<el-button size="small" type="primary" @click="upload">上传并解析</el-button>
 	</div>
 	<!-- 底部按钮 -->
 	<div class="confirm">
@@ -85,13 +95,16 @@ export default{
 			id: parseInt(this.$route.params.id),
 			questions: {},
 			question: [],
-			Alphabet: [],
+			Alphabet: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
 			queExp: true,
 			// 是新建的问卷还是已经有的问卷
 			newSurver: false,
 			endDate: "",
 			endTimeError: "hide",
-			date: new Date()
+			date: new Date(),
+			fileList: [],
+			uploadSurverTitle: "",
+			uploadSurverQuestion: []
 		}
 	},
 	methods: {
@@ -200,6 +213,7 @@ export default{
 	        ques.choose = { "A": 0, "B": 0 }
 	      } else {
 	      	// 文本题预留
+	      	ques.answer = "";
 	      }
 	      this.question.push(ques);
 	      // console.log(this.question);
@@ -315,7 +329,114 @@ export default{
     		}else{
     			this.endTimeError = "hide";
     		}
-    	}
+    	},
+    	//文件上传相关
+    	handleRemove(file, fileList) {
+	        // console.log(file, fileList);
+		},
+		handlePreview(file) {
+			console.log(file);
+		},
+		handleExceed(files, fileList) {
+			this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+		},
+		beforeRemove(file, fileList) {
+			// return this.$confirm(`确定移除 ${ file.name }？`);
+		},
+		upload(){
+			var _this= this;
+			var file =this.fileList[0];
+			if (!file) { // 若未选择文件
+				alert('请选择文件');
+				return;
+		    }
+			let fileType = file.name.split('.')[1];
+			if( fileType== "txt"){
+				// txt文件则利用h5的readfile直接在本地读取文件
+				var reader = new FileReader();
+				reader.readAsText(this.fileList[0].raw, "gb2312");
+				reader.onload = function(){
+					//读取完成后，数据保存在对象的result属性中
+					let txt = this.result;
+					// console.log(this.result)
+					let arr = txt.split('\n');
+					_this.uploadSurverQuestion = [];
+					// 问卷题目
+					_this.uploadSurverTitle = arr[0].trim();
+					let len= 1, i= 1, opindex= 0;
+					while(i< arr.length){
+						if(/^[1-9]/.test(arr[i])){
+							//以数字开头的代表当前行描述的为题目的问题
+							let tit = arr[i].trim().slice(2, -4);
+							let t = "";
+							let op = {};
+							let cho = {};
+							if(/单选/.test(arr[i])){
+								t = "radio";
+							}
+							if(/多选/.test(arr[i])){
+								t = "checkbox";
+							}
+							if(/问答/.test(arr[i])){
+								t = "text";
+								_this.uploadSurverQuestion.push({
+								number: len,
+								title: tit,
+								type: t,
+								answer: ""
+								})
+								i++;
+								len++;
+								opindex = 0;
+								continue;
+							}
+							i++;
+							while(arr[i]!= undefined && !/^[1-9]/.test(arr[i])){
+								let alp= _this.Alphabet[opindex];
+								op[alp]= arr[i].trim().slice(2);
+								cho[alp] = 0;
+								i++;
+								opindex++;
+							}
+							_this.uploadSurverQuestion.push({
+								number: len,
+								title: tit,
+								type: t,
+								option: op,
+								choose: cho
+							})
+							len++;
+							opindex = 0;		
+						}
+					}
+					// console.log(_this.uploadSurverQuestion);
+					_this.questions.surverTitle = _this.uploadSurverTitle;
+					_this.question = _this.uploadSurverQuestion;
+					_this.$confirm('导入问卷成功');
+					return false;
+				}
+			}else if(fileType== "doc" || fileType== "docx"){
+				//word文档就上传解析，本地读取不了
+				const formData = new FormData();
+		        const headerConfig = { headers: { 'Content-Type': 'multipart/form-data' } };
+		        formData.append('file', file.raw);
+		        this.$http.post('/api/uploadfile', formData, headerConfig).then(res => {
+		          console.log(res.body);
+		          if(res.body !={}){
+		          	this.questions.surverTitle = res.body.uploadSurverTitle;
+					this.question = res.body.uploadSurverQuestion;
+					this.$confirm('导入问卷成功');
+		          }
+		        })
+				return;
+			}else{
+				this.$confirm(`上传文件格式错误`);
+				return;
+			}
+		},
+		handleChange(file, fileList){
+			this.fileList = fileList;
+		}
 	},
 	watch: {
 		question: function() {
@@ -423,6 +544,7 @@ export default{
 }
 .surver_con > ol > .question{
 	width: 100%;
+	min-height: 100px;
 	position: relative;
 }
 .surver_con > ol > .question > .option-panel {

@@ -49,7 +49,7 @@
       };
       var checkName = (rule, value, callback) => {
         if (!value) {
-          callback(new Error('请输入密码'));
+          callback(new Error('请输入昵称'));
         } else if (value && value.length > 8) {
             callback(new Error('长度最大为8'));
         }else {
@@ -144,7 +144,7 @@
     },
     mounted() {
     	let path = this.$route.path.split('/')
-        if("addUser" == path[2]){
+        if("addUser" == path[2] || "register" == path[1]){
         	//邮箱变为可以编辑
         	this.dis = false;
         	return;

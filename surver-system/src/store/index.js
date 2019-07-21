@@ -7,7 +7,8 @@ const store = new Vuex.Store ({
 	state: {
 		endtime: "",
 		username: "",
-		Email: ""
+		Email: "",
+		adminLogin: false
 	},
 	getters: {
 

@@ -3,7 +3,9 @@
 const models = require('./db');
 const express = require('express');
 const router = express.Router();
- 
+
+var multer = require('multer')
+// var upload = multer({ dest: 'uploads/' })
 /************** 创建(create) 读取(get) 更新(update) 删除(delete) **************/
 
 //管理员登陆接口
@@ -342,4 +344,82 @@ router.post('/api/submitAnswer', (req, res)=> {
         }
     });
 })
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, 'file.docx')
+  }
+})
+
+var upload = multer({ storage: storage })
+//上传文件
+var mammoth = require("mammoth");
+//每次上传都会覆盖掉之前的file.docx文件
+router.post('/api/uploadfile', upload.single('file'), (req, res)=>{
+    // res.send("successed")
+    mammoth.extractRawText({path: "./uploads/file.docx"})
+        .then(function(result){
+        var text = result.value; // The raw text 
+        let arr = text.split('\n\n');
+        let uploadSurverQuestion = [];
+        // 问卷题目
+        let uploadSurverTitle = arr[0].trim();
+        let Alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+        let len= 1, i= 1, opindex= 0;
+        while(i< arr.length-1){
+            if(/^[1-9]/.test(arr[i])){
+                //以数字开头的代表当前行描述的为题目的问题
+                let tit = arr[i].trim().slice(2, -4);
+                let t = "";
+                let op = {};
+                let cho = {};
+                if(/单选/.test(arr[i])){
+                    t = "radio";
+                }
+                if(/多选/.test(arr[i])){
+                    t = "checkbox";
+                }
+                if(/问答/.test(arr[i])){
+                    t = "text";
+                    uploadSurverQuestion.push({
+                    number: len,
+                    title: tit,
+                    type: t,
+                    answer: ""
+                    })
+                    i++;
+                    len++;
+                    opindex = 0;
+                    continue;
+                }
+                i++;
+                while(arr[i]!= "" && !/^[1-9]/.test(arr[i])){
+                    let alp= Alphabet[opindex];
+                    op[alp]= arr[i].trim().slice(2);
+                    cho[alp] = 0;
+                    i++;
+                    opindex++;
+                }
+                uploadSurverQuestion.push({
+                    number: len,
+                    title: tit,
+                    type: t,
+                    option: op,
+                    choose: cho
+                })
+                len++;
+                opindex = 0;        
+            }
+        }
+        let data = {
+            "uploadSurverQuestion": uploadSurverQuestion,
+            "uploadSurverTitle": uploadSurverTitle
+        }
+        res.send(data);
+    })
+})
+
 module.exports = router;
